@@ -10,26 +10,31 @@ import { User } from 'src/app/shared/models/User';
 })
 export class HeaderComponent implements OnInit {
 
-  cartQuantity=0;
-  user!:User;
-  constructor(cartService:CartService,private userService:UserService) {
+  cartQuantity = 0;
+  user!: User;
+
+  constructor(private cartService: CartService, private userService: UserService) {
     cartService.getCartObservable().subscribe((newCart) => {
       this.cartQuantity = newCart.totalCount;
-    })
+    });
 
     userService.userObservable.subscribe((newUser) => {
       this.user = newUser;
-    })
-   }
+    });
+  }
 
   ngOnInit(): void {
   }
 
-  logout(){
+  logout() {
+    // Clear the cart when logging out
+    this.cartService.resetCart();
+
+    // Perform other logout actions...
     this.userService.logout();
   }
 
-  get isAuth(){
+  get isAuth() {
     return this.user.token;
   }
 }

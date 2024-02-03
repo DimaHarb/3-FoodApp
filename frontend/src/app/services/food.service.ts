@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { FOODS_BY_SEARCH_URL, FOODS_BY_TAG_URL, FOODS_TAGS_URL, FOODS_URL, FOOD_BY_ID_URL } from '../shared/constants/urls';
 import { Food } from '../shared/models/Food';
@@ -10,6 +10,8 @@ import { Tag } from '../shared/models/Tag';
   providedIn: 'root'
 })
 export class FoodService {
+  private favoriteItems: Food[] = [];
+  private favoriteSubject: BehaviorSubject<Food[]> = new BehaviorSubject<Food[]>([]);
 
   constructor(private http: HttpClient) { }
 
@@ -44,5 +46,38 @@ export class FoodService {
     return this.http.get<Food>(FOOD_BY_ID_URL + foodId);
   }
 
+  addToFavorites(food: Food): void {
+    if (!this.isInFavorites(food)) {
+      this.favoriteItems.push(food);
+      this.favoriteSubject.next([...this.favoriteItems]);
+      console.log('Added to favorites:', food);
+    }
+  }
   
+  removeFromFavorites(food: Food): void {
+    this.favoriteItems = this.favoriteItems.filter((item) => item.id !== food.id);
+    this.favoriteSubject.next([...this.favoriteItems]);
+    console.log('Removed from favorites:', food);
+  }
+  
+  getFavorites(): Observable<Food[]> {
+    return this.favoriteSubject.asObservable();
+  }
+  
+  isInFavorites(food: Food): boolean {
+    const isInFavorites = this.favoriteItems.some((item) => item.id === food.id);
+    console.log(`${food.name} is in favorites: ${isInFavorites}`);
+    return isInFavorites;
+  }
+
+  toggleFavorite(food: Food): void {
+    food.favorite = !food.favorite;
+
+    // Update the favorite status in the service
+    if (food.favorite) {
+      this.addToFavorites(food);
+    } else {
+      this.removeFromFavorites(food);
+    }
+  }
 }

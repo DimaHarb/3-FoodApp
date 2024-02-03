@@ -39,13 +39,17 @@
     font-weight: bold;
   }
   
-  .favorite{
-    color: #e72929;
+  .favorite {
     font-size: 2.5rem;
+    color: grey; 
+    transition: color 0.3s, font-size 0.3s; 
+    cursor: pointer;
   }
   
-  .favorite.not{
-    color: grey;
+  .favorite.not {
+    color: #e72929;
+    font-size: 3rem;
+    cursor: pointer; 
   }
   
   .origins{

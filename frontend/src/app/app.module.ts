@@ -22,6 +22,8 @@ import { DefaultButtonComponent } from './components/partials/default-button/def
 import { RegisterPageComponent } from './components/pages/register-page/register-page.component';
 import { LoadingComponent } from './components/partials/loading/loading.component';
 import { LoadingInterceptor } from './shared/interceptors/loading.interceptor';
+import { FavoritesComponent } from './components/pages/favorites/favorites.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +41,9 @@ import { LoadingInterceptor } from './shared/interceptors/loading.interceptor';
     TextInputComponent,
     DefaultButtonComponent,
     RegisterPageComponent,
-    LoadingComponent
+    LoadingComponent,
+    FavoritesComponent
+
   ],
   imports: [
     BrowserModule,

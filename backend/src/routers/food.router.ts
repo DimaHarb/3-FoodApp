@@ -1,7 +1,6 @@
 import {Router} from 'express';
-import { sample_foods, sample_tags } from '../data';
 import asyncHandler from 'express-async-handler';
-import { FoodModel } from '../models/food.model';
+import { FoodModel,  } from '../models/food.model';
 const router = Router();
 
 router.get("/seed", asyncHandler(
@@ -12,7 +11,7 @@ router.get("/seed", asyncHandler(
       return;
     }
 
-    await FoodModel.create(sample_foods);
+    await FoodModel.create();
     res.send("Seed Is Done!");
 }
 ))

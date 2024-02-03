@@ -58,5 +58,10 @@ export class CartService {
       const cartJson =localStorage.getItem('Cart');
       return cartJson? JSON.parse(cartJson): new Cart();
     }
+    resetCart(): void {
+      this.cart = new Cart();
+      localStorage.removeItem('Cart');
+      this.cartSubject.next(this.cart);
+    }
   }
 

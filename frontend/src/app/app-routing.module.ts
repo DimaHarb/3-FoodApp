@@ -5,6 +5,8 @@ import { FoodPageComponent } from './components/pages/food-page/food-page.compon
 import { CartPageComponent } from './components/pages/cart-page/cart-page.component';
 import { LoginPageComponent } from './components/pages/login-page/login-page.component';
 import { RegisterPageComponent } from './components/pages/register-page/register-page.component';
+import { FavoritesComponent } from './components/pages/favorites/favorites.component';
+
 
 const routes: Routes = [
   {path:'', component:HomeComponent},
@@ -13,7 +15,8 @@ const routes: Routes = [
   {path:'food/:id', component:FoodPageComponent},
   {path:'cart-page', component: CartPageComponent},
   {path:'login', component: LoginPageComponent},
-  {path:'register', component: RegisterPageComponent}
+  {path:'register', component: RegisterPageComponent},
+  {path:'favorites-page', component:FavoritesComponent }
 ];
 
 @NgModule({

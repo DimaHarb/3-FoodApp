@@ -11,20 +11,38 @@ import { Food } from 'src/app/shared/models/Food';
 })
 export class FoodPageComponent implements OnInit {
   food!: Food;
-  constructor(activatedRoute:ActivatedRoute, foodService:FoodService,
-    private cartService:CartService, private router: Router) {
-    activatedRoute.params.subscribe((params) => {
-      if(params.id)
-      foodService.getFoodById(params.id).subscribe(serverFood => {
-        this.food = serverFood;
-      });
-    })
-   }
+
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private foodService: FoodService,
+    private cartService: CartService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
+    this.activatedRoute.params.subscribe((params) => {
+      if (params.id) {
+        this.foodService.getFoodById(params.id).subscribe((serverFood) => {
+          this.food = serverFood;
+        });
+      }
+    });
   }
 
-  addToCart(){
+  toggleFavorite(food: Food): void {
+    console.log('Toggle favorite clicked:', food);
+    food.favorite = !food.favorite;
+  
+    // Update the favorite status in the service
+    if (food.favorite) {
+      this.foodService.addToFavorites(food);
+    } else {
+      this.foodService.removeFromFavorites(food);
+    }
+  }
+  
+
+  addToCart(): void {
     this.cartService.addToCart(this.food);
     this.router.navigateByUrl('/cart-page');
   }
