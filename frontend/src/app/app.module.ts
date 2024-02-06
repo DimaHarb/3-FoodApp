@@ -23,6 +23,8 @@ import { RegisterPageComponent } from './components/pages/register-page/register
 import { LoadingComponent } from './components/partials/loading/loading.component';
 import { LoadingInterceptor } from './shared/interceptors/loading.interceptor';
 import { FavoritesComponent } from './components/pages/favorites/favorites.component';
+import { ContactUsComponent } from './components/pages/contact-us/contact-us.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,8 @@ import { FavoritesComponent } from './components/pages/favorites/favorites.compo
     DefaultButtonComponent,
     RegisterPageComponent,
     LoadingComponent,
-    FavoritesComponent
+    FavoritesComponent,
+    ContactUsComponent
 
   ],
   imports: [
@@ -50,6 +53,7 @@ import { FavoritesComponent } from './components/pages/favorites/favorites.compo
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     ReactiveFormsModule,
     ToastrModule.forRoot({
       timeOut:3000,

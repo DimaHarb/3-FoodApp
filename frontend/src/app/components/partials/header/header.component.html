@@ -1,5 +1,5 @@
-
-<header>
+<div>
+  <header>
     <div class="container">
       <a routerLink="/" class="logo">Havana Café</a>
       <nav>
@@ -20,8 +20,12 @@
               Cart <span *ngIf="cartQuantity">{{cartQuantity}}</span>
             </a>
             <a routerLink="/favorites-page">Favourite</a>
+            <a routerLink="/contact-us">Contact Us</a>
           </li>
         </ul>
       </nav>
     </div>
   </header>
+
+  <router-outlet></router-outlet>
+</div>
